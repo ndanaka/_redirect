@@ -22,7 +22,9 @@ class Admin
 		);
 
 		if ( ! empty( $_POST['_wpnonce'] ) && wp_verify_nonce( $_POST['_wpnonce'], '_redirect' ) ) {
-			if ( ! empty( $_POST['items'] ) ) {
+			if ( empty( $_POST['items'] ) ) {
+				update_option( "_redirect", array() );
+			} else {
 				update_option( "_redirect", $_POST['items'] );
 			}
 		}

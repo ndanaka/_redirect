@@ -37,8 +37,8 @@ function do_redirect() {
 	foreach ( $redirects as $redirect ) {
 		$from = trim( $redirect['from'] );
 		if ( ! empty( $_SERVER['REQUEST_URI'] ) && $_SERVER['REQUEST_URI'] === $from ) {
-			header( "Location: " . trim( $redirect['to'] ),
-				true, trim( $redirect['code'] ) );
+			header( "Location: " . esc_url_raw( trim( $redirect['to'] ) ),
+				true, intval( trim( $redirect['code'] ) ) );
 			exit;
 		}
 	}
