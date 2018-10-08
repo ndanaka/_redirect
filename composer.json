@@ -1,0 +1,10 @@
+{
+    "require": {
+        "miya/gh-auto-updater": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "_redirect\\": "lib/"
+        }
+    }
+}
