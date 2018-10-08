@@ -46,15 +46,10 @@ before_script:
     phpcs --config-set installed_paths $HOME/.composer/vendor/wp-coding-standards/wpcs
   fi
 script:
-- |
-  if [[ ! -z "$WP_VERSION" ]] ; then
-    phpunit
-    WP_MULTISITE=1 phpunit
-  fi
-- |
-  if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
-    phpcs
-  fi
+  - phpunit_
+after_success:
+  - sed -i -e "s/nightly/${TRAVIS_TAG}/" $(basename $TRAVIS_REPO_SLUG).php
+  - curl https://raw.githubusercontent.com/miya0001/auto-build/master/auto-build.sh | bash
 deploy:
   provider: releases
   skip_cleanup: true
